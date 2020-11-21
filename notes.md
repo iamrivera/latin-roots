@@ -1,0 +1,1 @@
+Welcome to Latin Roots - A Basic CLI Project 
