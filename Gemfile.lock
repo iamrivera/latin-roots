@@ -1,0 +1,50 @@
+PATH
+  remote: .
+  specs:
+    latin_roots_II (0.1.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    coderay (1.1.3)
+    diff-lcs (1.4.4)
+    json (2.3.1)
+    method_source (1.0.0)
+    mini_portile2 (2.4.0)
+    nokogiri (1.10.10)
+      mini_portile2 (~> 2.4.0)
+    open-uri (0.1.0)
+    pry (0.13.1)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
+    rake (12.3.3)
+    require_all (3.0.0)
+    rspec (3.10.0)
+      rspec-core (~> 3.10.0)
+      rspec-expectations (~> 3.10.0)
+      rspec-mocks (~> 3.10.0)
+    rspec-core (3.10.0)
+      rspec-support (~> 3.10.0)
+    rspec-expectations (3.10.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.10.0)
+    rspec-mocks (3.10.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.10.0)
+    rspec-support (3.10.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  json
+  latin_roots_II!
+  nokogiri
+  open-uri
+  pry
+  rake (~> 12.0)
+  require_all
+  rspec (~> 3.0)
+
+BUNDLED WITH
+   2.1.4

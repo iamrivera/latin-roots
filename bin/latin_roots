@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+require 'require_all'
+require "bundler/setup"
+require "latin_roots_II"
+require "nokogiri"
+require "open-uri"
+require "pry"
+require "json"
+
+require_all 'lib'
+
+puts "Hello World"
+

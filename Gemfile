@@ -5,3 +5,9 @@ gemspec
 
 gem "rake", "~> 12.0"
 gem "rspec", "~> 3.0"
+gem "pry"
+gem "json"
+gem "nokogiri"
+gem "open-uri"
+gem "require_all"
+
