@@ -3,12 +3,10 @@ module LatinRootsII
     class CLI
         attr_accessor :visitor
        
-        def call
+        def call #work in a persistent back feature if possible or time permits 
             LatinRootsII::Scraper.new 
             menu
-            until menu_two == 'adios'
-                menu_two
-            end     
+            menu_two  
             # binding.pry
         end
 
@@ -52,14 +50,13 @@ module LatinRootsII
                     country_list
                     country_explore
                 when "no"
-                    puts "Too bad! I was looking forward to sharing some fun facts with you. Mi CLI es tu CLI so come on back whenever you're ready :)" 
+                    puts "Too bad! I was looking forward to sharing some fun facts with you. Mi CLI es tu CLI so come on back whenever you're ready :)"
                 when 'adios'
                     puts "Goodbye! Hope to see you again!"
                 else
                     print "Mea Culpa (that's Latin for 'My Fault'), but I didn't quite get that. Please repeat your answer: "
                     menu_two
                 end
-            input
         end
     end
 
