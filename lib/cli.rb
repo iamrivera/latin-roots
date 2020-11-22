@@ -5,13 +5,22 @@ module LatinRootsII
        
         def call
             LatinRootsII::Scraper.new 
-            menu            
+            menu
+            until menu_two == 'adios'
+                menu_two
+            end     
             # binding.pry
         end
 
         def country_list
             country_list = Country.all.collect {|i| i.name}
             puts country_list
+        end
+
+        def country_explore
+            country_list
+            print "Please enter the name of the country you would like to learn more about:  "
+            input = gets.chomp.strip.downcase.delete(" ")
         end
 
         def menu 
@@ -27,18 +36,30 @@ module LatinRootsII
             puts "And remember, you're una turista and you can leave anytime you want by simply saying 'Adios' (that's Spanish for Goodbye)."
             puts "" 
             print "What would you like to do?"
-            @choice_one = gets.chomp.strip.downcase.delete(" ")
-            case @choice_one
-            when "introporfavor"
-                puts "INSERT THE LATIN AMERICA INTRODUCTION"
-            when "vamos"
-                country_list
-            when 'adios'
-                puts "Goodbye! Hope to see you again!"
-            else
-                print "Mea Culpa (that's Latin for 'My Fault'), but I didn't quite get that. Please repeat your answer: "
-                @choice_one = gets.chomp.strip.downcase.delete(" ")
-            end
+        end
+
+        def menu_two
+            input = gets.chomp.strip.downcase.delete(" ")
+                case input
+                when "introporfavor"
+                    puts "INSERT THE LATIN AMERICA INTRODUCTION"
+                    print "Would you like to see which countries you can explore further?" 
+                    menu_two
+                when "vamos"
+                    country_list
+                    country_explore 
+                when "yes"
+                    country_list
+                    country_explore
+                when "no"
+                    puts "Too bad! I was looking forward to sharing some fun facts with you. Mi CLI es tu CLI so come on back whenever you're ready :)" 
+                when 'adios'
+                    puts "Goodbye! Hope to see you again!"
+                else
+                    print "Mea Culpa (that's Latin for 'My Fault'), but I didn't quite get that. Please repeat your answer: "
+                    menu_two
+                end
+            input
         end
     end
 
