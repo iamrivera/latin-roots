@@ -11,7 +11,7 @@ module LatinRootsII
         end
 
         def country_list
-            country_list = Country.all.collect {|i| i.name}
+            country_list = Country.all.collect.each.with_index {|country, index| "#{index}. #{country.name}"}
             puts country_list
         end
 
@@ -19,6 +19,7 @@ module LatinRootsII
             country_list
             print "Please enter the name of the country you would like to learn more about:  "
             input = gets.chomp.strip.downcase.delete(" ")
+            Country.find_by_name(input)
         end
 
         def menu 
@@ -27,9 +28,10 @@ module LatinRootsII
             puts "My name is Miguel and I will be your virtual tour guide. What is your name?"
             puts ""
             print "Please enter name: " 
-            @visitor = gets.chomp.strip.capitalize
+            visitor = gets.chomp.strip.capitalize
+            User.new(visitor)
             puts "" 
-            puts "Hello #{@visitor}! If you would like to begin with a brief intro to Latin America, please enter 'Intro Por Favor' (that's Spanish for Intro Please). Or to skip the intro and learn more about specific Latin American countries or entities, please enter 'Vamos' (that's Portuguese for Let's Go)."
+            puts "Hello #{User.all.last.name}! If you would like to begin with a brief intro to Latin America, please enter 'Intro Por Favor' (that's Spanish for Intro Please). Or to skip the intro and learn more about specific Latin American countries or entities, please enter 'Vamos' (that's Portuguese for Let's Go)."
             puts ""
             puts "And remember, you're una turista and you can leave anytime you want by simply saying 'Adios' (that's Spanish for Goodbye)."
             puts "" 
@@ -40,14 +42,14 @@ module LatinRootsII
             input = gets.chomp.strip.downcase.delete(" ")
                 case input
                 when "introporfavor"
-                    puts "INSERT THE LATIN AMERICA INTRODUCTION"
+                    puts "" 
+                    puts Scraper.introduction
+                    puts ""
                     print "Would you like to see which countries you can explore further?" 
                     menu_two
                 when "vamos"
-                    country_list
                     country_explore 
                 when "yes"
-                    country_list
                     country_explore
                 when "no"
                     puts "Too bad! I was looking forward to sharing some fun facts with you. Mi CLI es tu CLI so come on back whenever you're ready :)"

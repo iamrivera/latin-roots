@@ -5,9 +5,16 @@ module LatinRootsII
 
         @@all = []
 
-        def initialize(name, link)
+        def initialize(link, name, name_official, leader, capital, language, currency, intro, government)
             @name = name
             @link = link
+            @name_official = name_official
+            @leader = leader
+            @capital = capital
+            @language = language
+            @currency = currency
+            @intro = intro
+            @government = government
             @@all << self
         end
 
@@ -19,24 +26,42 @@ module LatinRootsII
         #     end
         # end
 
-        def self.country_detail
-            @@all.each do |instance|
-                page = Nokogiri::HTML(open("#{instance.link}"))
-                @name_official = page.css("div.fact-box-details dl:contains('Official name') dd").text.gsub(/ \(.*/,"").strip
-                @leader = page.css("div.fact-box-details dl:contains('Head of state') dd").text.gsub(/\A.*:|\d/,"").strip
-                @capital = page.css("div.fact-box-details dl:contains('Capital') dd").text.gsub(/\d/,"").gsub(";"," &").strip
-                @language = page.css("div.fact-box-details dl:contains('Official language') dd").text.gsub(/\d/,"").strip.gsub(";"," &").strip
-                @currency = page.css("div.fact-box-details dl:contains('Monetary unit') dd").text.gsub(/\(.*|\d/,"").split.collect(&:capitalize).join(' ').strip
-                # @intro = page.css("section#ref1 p").text.strip
-                @government = if page.css("div.fact-box-details dl:contains('Form of government')") || page.css("div.fact-box-details dl:contains('Political status')") 
-                    page.css("div.fact-box-details dl:nth-of-type(2) dd").text.gsub(/\d| \(.*/,"").split.collect(&:capitalize).join(' ').strip
-                end
-            end
-        end
+        # def self.country_detail
+        #     @@all.each do |instance|
+        #         page = Nokogiri::HTML(open("#{instance.link}"))
+        #         @name_official = page.css("div.fact-box-details dl:contains('Official name') dd").text.gsub(/ \(.*/,"").strip
+        #         @leader = page.css("div.fact-box-details dl:contains('Head of state') dd").text.gsub(/\A.*:|\d/,"").strip
+        #         @capital = page.css("div.fact-box-details dl:contains('Capital') dd").text.gsub(/\d/,"").gsub(";"," &").strip
+        #         @language = page.css("div.fact-box-details dl:contains('Official language') dd").text.gsub(/\d/,"").strip.gsub(";"," &").strip
+        #         @currency = page.css("div.fact-box-details dl:contains('Monetary unit') dd").text.gsub(/\(.*|\d/,"").split.collect(&:capitalize).join(' ').strip
+        #         # @intro = page.css("section#ref1 p").text.strip
+        #         @government = if page.css("div.fact-box-details dl:contains('Form of government')") || page.css("div.fact-box-details dl:contains('Political status')") 
+        #             page.css("div.fact-box-details dl:nth-of-type(2) dd").text.gsub(/\d| \(.*/,"").split.collect(&:capitalize).join(' ').strip
+        #         end
+        #     end
+        # end
 
         def self.all
             @@all
         end 
+
+        def self.find_by_name(name)
+            @@all.each do |i| 
+                if i.name == name.upcase
+                    puts i.name
+                    puts ""
+                    puts i.intro
+                    puts ""
+                    puts i.capital
+                else
+                    puts "Please re-enter selection"
+                end
+                binding.pry
+            end
+        end
+
+
+
 
     end
 
