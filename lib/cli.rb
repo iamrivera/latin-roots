@@ -11,16 +11,38 @@ module LatinRootsII
         end
 
         def country_list
+            puts ""
+            puts "THE COUNTRIES OF LATIN AMERICA"
             country_list = Country.all.collect.each.with_index(1) {|country, index| "#{index}. #{country.name}"}
             puts country_list
         end
 
         def country_explore
             country_list
-            print "Please enter the number of the country you would like to learn more about:  "
-            input = gets.chomp.strip.downcase.delete(" ")
-            validated_input = input.to_i - 1 
-            country_details(validated_input)
+            print "Please enter the number of the country you would like to learn more about:"
+                input = gets.strip
+                if validate_selection(input)
+                input = input.to_i - 1
+                country_details(input)
+                else
+                country_explore_error
+                end
+        end
+
+        def country_explore_error
+            country_list
+            puts "Aye No! Your entry was invalid. Please enter a valid number (i.e. '5' or '24') from the list above:"
+            input = gets.strip
+            if validate_selection(input)
+            input = input.to_i - 1
+            country_details(input)
+            else
+            country_explore_error
+            end
+        end
+
+        def validate_selection(input)
+            input.to_i > 0
         end
 
         def country_details(input)
@@ -69,7 +91,7 @@ module LatinRootsII
             input = gets.chomp.strip.downcase.delete(" ")
                 case input
                 when "introporfavor"
-                    puts "" 
+                    puts ""
                     puts Scraper.introduction
                     puts ""
                     print "Would you like to see which countries you can explore further?" 
@@ -83,6 +105,7 @@ module LatinRootsII
                 when 'adios'
                     puts "Goodbye! Hope to see you again!"
                 when 'passport'
+                    puts ""
                     puts "Countries #{@traveller.name} has visited:"
                     puts @traveller.passport
                     puts "What would you like to do now?"

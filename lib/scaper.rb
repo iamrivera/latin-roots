@@ -25,7 +25,7 @@ module LatinRootsII
         end
         
         def self.introduction 
-           puts  @@page.css("section#ref1 p").text.gsub("This is an alphabetically ordered list of countries in Latin America. (See also Central America; North America; South America; West Indies (the Caribbean); Latin American art; Latin American architecture; Latin American dance; Latin American economic system; Latin American literature; Latin American music.)","")
+           puts @@page.css("section#ref1 p").text.strip.gsub("This is an alphabetically ordered list of countries in Latin America. (See also Central America; North America; South America; West Indies (the Caribbean); Latin American art; Latin American architecture; Latin American dance; Latin American economic system; Latin American literature; Latin American music.)","")
         end
 
     end
