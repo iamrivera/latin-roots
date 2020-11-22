@@ -83,7 +83,10 @@ module LatinRootsII
                 when 'adios'
                     puts "Goodbye! Hope to see you again!"
                 when 'passport'
+                    puts "Countries #{@traveller.name} has visited:"
                     puts @traveller.passport
+                    puts "What would you like to do now?"
+                    menu_two
                 else
                     print "Mea Culpa (that's Latin for 'My Fault'), but I didn't quite get that. Please repeat your answer: "
                     menu_two
