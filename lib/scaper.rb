@@ -19,7 +19,8 @@ module LatinRootsII
                 government = if link.css("div.fact-box-details dl:contains('Form of government')") || link.css("div.fact-box-details dl:contains('Political status')") 
                     link.css("div.fact-box-details dl:nth-of-type(2) dd").text.gsub(/\d| \(.*/,"").split.collect(&:capitalize).join(' ').strip
                 end
-                Country.new(link, name, name_official, leader, capital, language, currency, intro, government)
+                url = url 
+                Country.new(link, name, name_official, leader, capital, language, currency, intro, government, url)
             end
         end
         

@@ -1,12 +1,13 @@
 module LatinRootsII
     
     class Country
-        attr_accessor :name, :name_official, :government, :leader, :capital, :language, :currency, :link, :intro #try dynamic attr function (see learn module notes on "dynamic attr" for code syntax)
+        attr_accessor :name, :name_official, :government, :leader, :capital, :language, :currency, :link, :intro, :url #try dynamic attr function (see learn module notes on "dynamic attr" for code syntax)
 
         @@all = []
 
-        def initialize(link, name, name_official, leader, capital, language, currency, intro, government)
+        def initialize(link, name, name_official, leader, capital, language, currency, intro, government, url)
             @name = name
+            @url = url
             @link = link
             @name_official = name_official
             @leader = leader
