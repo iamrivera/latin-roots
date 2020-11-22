@@ -1,8 +1,13 @@
 # LatinRootsII
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/latin_roots_II`. To experiment with that code, run `bin/console` for an interactive prompt.
+Welcome to Latin Roots! Our CLI program is built to provide users a fun and interactive way to learn about the various cultures of Latin America. We want Latin Roots to become a repository for and celebration of all things La Vida Latina. 
 
-TODO: Delete this and the text above, and describe your gem
+The user experience is modeled after a guided travel tour. Users are assinged a profile and are introduced to their travel guide Alberto. Alberto issues prompts that help guide the users through an interactive text based tour of Latin American countries, storing and creating a passport for our travellers along the way and even assigning them Traveler Status based on their number of visits. 
+
+The goal is to streamline the code over time and include other external data sources that can create a richer wealth of knowledge for Latin Culture. Eventually each country will have famous artists, monuments, historic moments, etc. 
+
+Classes: Country | Scraper | User | CLI 
+Source(s): Encyclopedia Britannica  
 
 ## Installation
 
