@@ -49,19 +49,29 @@ module LatinRootsII
             puts ""
             @traveller.countries = Country.all[input].name.capitalize
             # binding.pry
-            puts "Welcome to #{Country.all[input].name.capitalize} (#{Country.all[input].name_official})!"
+            if Country.all[input].name_official.empty?
+                puts "Welcome to #{Country.all[input].name.capitalize}!"
+            else
+                puts "Welcome to #{Country.all[input].name.capitalize} (#{Country.all[input].name_official})!"
+            end
             puts ""
-            puts "Here in #{Country.all[input].name.capitalize}, we speak #{Country.all[input].language}." 
+            if !Country.all[input].name_official.empty?
+                puts "Here in #{Country.all[input].name.capitalize}, we speak #{Country.all[input].language}."
+            end
             puts "" 
             puts "Here's a quick intro into our beloved land..." 
-            puts "#{Country.all[input].intro}"
+            puts "#{Country.all[input].intro.strip}"
             puts "" 
             puts "Would you like to learn more about #{Country.all[input].name.capitalize}?"
             selection = gets.chomp.strip.downcase.delete(" ")
             case selection
             when "yes"
                 puts ""
-                puts "Alright! Our country's leader is #{Country.all[input].leader}. Everyone has their opinion, but definitely look them up! They oversee the government, which is considered a #{Country.all[input].government}. Many people make up the government and are ultimately resposible for the national economy, which operates on our currency, the #{Country.all[input].currency}. For more information, please visit #{Country.all[input].url}"
+                if !Country.all[input].leader.empty?
+                    puts "Alright! Our country's leader is #{Country.all[input].leader}. Everyone has their opinion, but definitely look them up! They oversee the government, which is considered a #{Country.all[input].government}. Many people make up the government and are ultimately resposible for the national economy, which operates on our currency, the #{Country.all[input].currency}. For more information, please visit #{Country.all[input].url}"
+                else
+                    puts "Looks like our team on the ground has yet to report back on this country! For more information, please visit #{Country.all[input].url} "
+                end
                 puts ""
                 print "Thanks for visiting! Would you like to visit another country? If so enter 'Vamos' OR You can now access your passport to see the countries you have virtually visited by entering 'Passport'."
                 menu_two
