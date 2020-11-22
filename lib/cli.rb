@@ -11,15 +11,16 @@ module LatinRootsII
         end
 
         def country_list
-            country_list = Country.all.collect.each.with_index {|country, index| "#{index}. #{country.name}"}
+            country_list = Country.all.collect.each.with_index(1) {|country, index| "#{index}. #{country.name}"}
             puts country_list
         end
 
         def country_explore
             country_list
-            print "Please enter the name of the country you would like to learn more about:  "
+            print "Please enter the number of the country you would like to learn more about:  "
             input = gets.chomp.strip.downcase.delete(" ")
-            Country.find_by_name(input)
+            validated_input = input.to_i - 1 
+            puts Country.all[validated_input].name
         end
 
         def menu 

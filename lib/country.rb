@@ -45,19 +45,20 @@ module LatinRootsII
             @@all
         end 
 
-        def self.find_by_name(name)
-            @@all.each do |i| 
-                if i.name == name.upcase
-                    puts i.name
-                    puts ""
-                    puts i.intro
-                    puts ""
-                    puts i.capital
+        def self.find_by_name(input)
+            selection = nil
+            @@all.each.with_index do |country, index| 
+                if index == input.to_i - 1
+                    selection = country
                 else
                     puts "Please re-enter selection"
                 end
-                binding.pry
             end
+            binding.pry
+            puts "#{selection.name}"
+            puts "#{selection.name_official}"
+            puts "#{selection.intro}"
+
         end
 
 
