@@ -1,13 +1,14 @@
 module LatinRootsII
 
     class User
-        attr_accessor :name
+        attr_accessor :name 
 
         @@all = []
 
         def initialize(name)
             @name = name
             @countries = []
+            @visits = []
             @@all << self
         end
 
@@ -17,6 +18,14 @@ module LatinRootsII
 
         def passport
             puts countries.uniq
+        end
+
+        def visits=(name)
+            @visits << name
+        end
+
+        def visits
+            @visits
         end
 
         def countries=(name)

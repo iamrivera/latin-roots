@@ -6,7 +6,7 @@ module LatinRootsII
         def call #work in a persistent back feature if possible or time permits 
             LatinRootsII::Scraper.new 
             menu
-            menu_two  
+            menu_two
             # binding.pry
         end
 
@@ -31,7 +31,7 @@ module LatinRootsII
 
         def country_explore_error
             country_list
-            puts "Aye No! Your entry was invalid. Please enter a valid number (i.e. '5' or '24') from the list above:"
+            puts "Aye No! Your entry was invalid. Please enter a valid number (e.g. '5' or '24') from the list above:"
             input = gets.strip
             if validate_selection(input)
             input = input.to_i - 1
@@ -42,12 +42,13 @@ module LatinRootsII
         end
 
         def validate_selection(input)
-            input.to_i > 0
+            input.to_i > 0 && input.to_i <= Country.all.count
         end
 
         def country_details(input)
             puts ""
             @traveller.countries = Country.all[input].name.capitalize
+            @traveller.visits = Country.all[input].name.capitalize
             # binding.pry
             if Country.all[input].name_official.empty?
                 puts "Welcome to #{Country.all[input].name.capitalize}!"
@@ -62,6 +63,10 @@ module LatinRootsII
             puts "Here's a quick intro into our beloved land..." 
             puts "#{Country.all[input].intro.strip}"
             puts "" 
+            learn_more(input)
+        end
+
+        def learn_more(input) 
             puts "Would you like to learn more about #{Country.all[input].name.capitalize}?"
             selection = gets.chomp.strip.downcase.delete(" ")
             case selection
@@ -77,20 +82,24 @@ module LatinRootsII
                 menu_two
             when "no"
                 print "What would you like to do? Remember your options are 'Intro Por Favor', 'Vamos', 'Adios'....and SURPRISE! You can now access your passport to see the countries you have virtually visited by entering 'Passport'."
-                     menu_two
+                menu_two
+            else
+                puts "Aye! Wrong selection. Please enter 'Yes' or 'No'. " 
+                learn_more(input)
             end
         end
+
 
         def menu 
             puts "Bienvenidos! Bem-Vinda! Allianchu! Welcome to Latin Roots, an interactive virtual reference guide to la vida latina!"
             puts ""
-            puts "My name is Miguel and I will be your virtual tour guide. What is your name?"
+            puts "My name is Alberto and I will be your virtual tour guide. What is your name?"
             puts ""
             print "Please enter name: " 
             visitor = gets.chomp.strip.capitalize
             @traveller = User.new(visitor)
             puts "" 
-            puts "Hello #{User.all.last.name}! If you would like to begin with a brief intro to Latin America, please enter 'Intro Por Favor' (that's Spanish for Intro Please). Or to skip the intro and learn more about specific Latin American countries or entities, please enter 'Vamos' (that's Portuguese for Let's Go)."
+            puts "Hello #{User.all.last.name}! If you would like to begin with a brief intro to Latin America, please enter 'Intro Por Favor' (that's Spanish for Intro Please). Or to skip the intro and learn more about specific Latin American countries or entities, please enter 'Vamos' (that's Portuguese for Let's Go). You can also view your 'Travel Profile' by entering 'My Profile'. And keep a sharp eye out as there may be some surprises along the way (hint: we really like to go to 'the beach')!"
             puts ""
             puts "And remember, you're una turista and you can leave anytime you want by simply saying 'Adios' (that's Spanish for Goodbye)."
             puts "" 
@@ -120,11 +129,44 @@ module LatinRootsII
                     puts @traveller.passport
                     puts "What would you like to do now?"
                     menu_two
+                when 'laplaya'
+                    la_playa
+                    puts "What would like to do now?"
+                    menu_two
+                when "myprofile"
+                    traveller_profile
                 else
                     print "Mea Culpa (that's Latin for 'My Fault'), but I didn't quite get that. Please repeat your answer: "
                     menu_two
                 end
         end
+
+        def la_playa
+            puts "🌊🌊🌊🌊🌊🌊"
+            puts "Vamos a la playa, oh oh oh oh
+            Vamos a la playa, oh oh oh oh
+            Vamos a la playa, oh oh oh oh
+            Vamos a la playa, oh oh"
+        end
+
+        def traveller_profile
+            puts ""
+            puts "#{@traveller.name}'s Profile as of #{Time.new.inspect}"
+            puts "Visits: #{@traveller.visits.count}"
+            puts "Passport: #{@traveller.countries.uniq}"
+            puts ""
+            if @traveller.visits.count <= 4
+                puts "Status: Rookie"
+            elsif @traveller.visits.count >= 5 && @traveller.visits.count < 8
+                puts "Status: Explorer"
+            else
+                puts "Status: Legend"
+            end
+            puts ""
+            puts "What would you like to do now?"
+            menu_two
+        end
+        
     end
 
 end
